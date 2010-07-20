@@ -1,0 +1,50 @@
+== Introduction
+Freelancer API for ruby
+
+This api allow to call freelancer api from ruby code.
+
+It's can login to freelancer with "mechanize", using oauth library 
+
+== Installation
+
+gem install freelancer4ruby
+
+== Usage
+
+* Shortest way, to login
+
+   freelancer=Freelancer.new false,"application_token","application_secret","username","password"
+   projects=freelancer.searchProjects
+
+* Custom one step login
+
+   freelancer=Freelancer.new false
+   freelancer.application_token=token
+   freelancer.application_secret=secret
+   freelancer.username=username
+   freelancer.password=password
+
+   freelancer.login
+   freelancer.searchprojects
+
+* Hand staged login
+   (no username and password)
+
+   freelancer=Freelancer.new false,"application_token","application_secret"
+   freelancer.login_stage1
+   authorize_url=freelancer.login_stage2
+   #.... wait for user login and get the verifier key from user...
+   freelancer.login_stage3
+   freelancer.searchProjects
+
+* Usage for webpages with callback
+   (no username and password)
+
+   freelancer=Freelancer.new false,"application_token","application_secret"
+   freelancer.callback="http://example.com/callbackurl"
+   freelancer.login_stage1
+   authorize_url=freelancer.login_stage2
+   #... redirect user to authorize url ...
+   #... user come back to callback page ...
+   freelancer.login_stage3
+   freelancer.serchProjects
