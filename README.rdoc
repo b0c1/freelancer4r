@@ -7,7 +7,7 @@ It's can login to freelancer with "mechanize", using oauth library
 
 == Installation
 
-gem install freelancer4ruby
+gem install freelancer4r
 
 == Usage
 
