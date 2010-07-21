@@ -1,22 +1,44 @@
 == Introduction
 Freelancer API for ruby
 
-This api allow to call freelancer api from ruby code.
-
-It's can login to freelancer with "mechanize", using oauth library 
+   This api allow to call freelancer api from ruby code.
+   It's can login to freelancer with "mechanize", using oauth library 
 
 == Installation
 
-gem install freelancer4r
+   gem install freelancer4r
 
+== Detailed information
+   
+   Freelancer api implements two different api for different approach.
+     * Full Freelancer.com API - with this you can do anything with freelancer, required oauth authentication
+     * Freelancer.com Widget API - with this you can do minimal but not required oauth authentication
+     
+   Full freelancer API modules:
+     * Freelancer::Common
+     * Freelancer::Employer
+     * Freelancer::FreelancersCall
+     * Freelancer::Job
+     * Freelancer::Message
+     * Freelancer::Notification
+     * Freelancer::Payment
+     * Freelancer::Profile
+     * Freelancer::Project
+     * Freelancer::User
+   
+   Widget API modules:
+     * Freelancer::Widget
+     
+   See modules documentation
+   
 == Usage
 
-* Shortest way, to login
+* Shortest way, to login (require mechanize gem)
 
    freelancer=Freelancer.new false,"application_token","application_secret","username","password"
    projects=freelancer.searchProjects
 
-* Custom one step login
+* Custom one step login (require mechanize gem)
 
    freelancer=Freelancer.new false
    freelancer.application_token=token
@@ -27,8 +49,7 @@ gem install freelancer4r
    freelancer.login
    freelancer.searchprojects
 
-* Hand staged login
-   (no username and password)
+* Hand staged login (no username and password)
 
    freelancer=Freelancer.new false,"application_token","application_secret"
    freelancer.login_stage1
@@ -37,8 +58,7 @@ gem install freelancer4r
    freelancer.login_stage3
    freelancer.searchProjects
 
-* Usage for webpages with callback
-   (no username and password)
+* Usage for web pages with callback (no username and password)
 
    freelancer=Freelancer.new false,"application_token","application_secret"
    freelancer.callback="http://example.com/callbackurl"
@@ -48,3 +68,9 @@ gem install freelancer4r
    #... user come back to callback page ...
    freelancer.login_stage3
    freelancer.serchProjects
+
+* Using widget api (very basic api with limitations, but not required authentication)
+   
+   widget=Freelancer.new_widget true
+   widget.search :keyword=>"Ruby"
+   

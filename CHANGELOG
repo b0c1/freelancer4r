@@ -1,3 +1,10 @@
+== Freelancer4r 1.0.2 (2010.07.21)
+* Widget API completed
+* RDoc correction
+* Github project url added to gemspec
+* Rdoc target added to Rakefile
+* Removed mechanize from dependency
+
 == Freelancer4r 1.0.1 (2010.07.15)
 * Added widget api for call http://www.freelancer.com/affiliate-api.html API
 * First public release

@@ -12,10 +12,10 @@ module Freelancer
     #http://developer.freelancer.com/GetAccountTransactionList
     #
     #<b>Optional:</b>
-    #:count     => (Default: 50)
-    #:page      => (Default: 0)
-    #:datefrom  => Get transactions from the date
-    #:dateto    => Get transactions up to the date
+    # :count     => (Default: 50)
+    # :page      => (Default: 0)
+    # :datefrom  => Get transactions from the date
+    # :dateto    => Get transactions up to the date
     def getAccountTransactionList *args
       options=fill_args [
         :count,:page,:datefrom,:dateto
@@ -28,13 +28,13 @@ module Freelancer
     #http://developer.freelancer.com/RequestWithdrawal
     #
     #<b>Required:</b>
-    #:amount          => Withdraw amount
-    #:method          => :paypal | :moneybooker | :wire | :paynoneer (default)
-    #:additionaltext  => Required for wire withdraw
-    #:paypalemail     => Required for paypal withdraw
-    #:mb_account      => Required for moneybooker withdraw
-    #:description     => Required for wire withedraw
-    #:country_code    => Required for wire withdraw
+    # :amount          => Withdraw amount
+    # :method          => :paypal | :moneybooker | :wire | :paynoneer (default)
+    # :additionaltext  => Required for wire withdraw
+    # :paypalemail     => Required for paypal withdraw
+    # :mb_account      => Required for moneybooker withdraw
+    # :description     => Required for wire withedraw
+    # :country_code    => Required for wire withdraw
     def requestWithdrawal *args
       options=fill_args [
         :amount,
@@ -61,12 +61,12 @@ module Freelancer
     #http://developer.freelancer.com/CreateMilestonePayment
     #
     #<b>Required:</b>
-    #:projectid     => Mandatory if Partial or Full payment for a project.
-    #:amount        => Milestone amount
-    #:touserid      => Userid or username create milestone payment to
-    #:tousername    => Userid or username create milestone payment to
-    #:reasontext    => Text attached to transfer
-    #:reasontype    => partial|full|other
+    # :projectid     => Mandatory if Partial or Full payment for a project.
+    # :amount        => Milestone amount
+    # :touserid      => Userid or username create milestone payment to
+    # :tousername    => Userid or username create milestone payment to
+    # :reasontext    => Text attached to transfer
+    # :reasontype    => partial|full|other
     def createMilestonePayment *args
       options=fill_args [
         :projectid,
@@ -95,7 +95,7 @@ module Freelancer
     #http://developer.freelancer.com/CancelMilestone
     #
     #<b>Required:</b>
-    #:transactionid     => Transaction Id
+    # :transactionid     => Transaction Id
     def cancelMilestone *args
       options=fill_args [:transactionid],[:transactionid],*args
       request "/Payment/cancelMilestone.json", options
@@ -106,9 +106,9 @@ module Freelancer
     #http://developer.freelancer.com/GetAccountMilestoneList
     #
     #<b>Optional:</b>
-    #:type    => Incoming(default) or Outgoing
-    #:count   => (Default: 50)
-    #:page    => (Default: 0)
+    # :type    => Incoming(default) or Outgoing
+    # :count   => (Default: 50)
+    # :page    => (Default: 0)
     def getAccountMilestoneList *args
       options=fill_args [:type,:count,:page],[],*args
       request "/Payment/getAccountMilestoneList.json", options
@@ -119,9 +119,9 @@ module Freelancer
     #http://developer.freelancer.com/GetAccountWithdrawalList
     #
     #<b>Optional:</b>
-    #:type    => Incoming(default) or Outgoing
-    #:count   => (Default: 50)
-    #:page    => (Default: 0)
+    # :type    => Incoming(default) or Outgoing
+    # :count   => (Default: 50)
+    # :page    => (Default: 0)
     def getAccountWithdrawalList *args
       options=fill_args [:type,:count,:page],[],*args
       request "/Payment/getAccountMilestoneList.json", options
@@ -132,7 +132,7 @@ module Freelancer
     #http://developer.freelancer.com/RequestReleaseMilestone
     #
     #<b>Required:</b>
-    #:transactionid     => Transaction Id
+    # :transactionid     => Transaction Id
     def requestReleaseMilestone *args
       options=fill_args [:transactionid],[:transactionid],*args
       request "/Payment/requestReleaseMilestone.json", options
@@ -143,8 +143,8 @@ module Freelancer
     #http://developer.freelancer.com/ReleaseMilestone
     #
     #<b>Required:</b>
-    #:transactionid     => Transaction Id
-    #:fullname          => Fullname of the payer
+    # :transactionid     => Transaction Id
+    # :fullname          => Fullname of the payer
     def releaseMilestone *args
       options=fill_args [:transactionid,:fullname],[:transactionid,:fullname],*args
       request "/Payment/releaseMilestone.json", options

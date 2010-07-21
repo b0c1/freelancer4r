@@ -4,6 +4,7 @@ require 'cgi'
 
 module Freelancer
   module Widget
+    protected
     def request_widget path, parameters={}
       params=parameters.map do |k,v|
         if v.is_a?(TrueClass) || v.is_a?(FalseClass)
@@ -14,46 +15,46 @@ module Freelancer
             "#{CGI.escape(k.to_s)}[]=#{CGI.escape(item.to_s)}"
           end.join("&")
         else
-          puts v
           "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}"
         end
       end.join("&")
       url=api_url+path
       url+="?#{params}" if params.length > 0
       uri=URI.parse(url)
-      puts uri
-      #      response=Net::HTTP.get_response(uri)
-      #    puts response.body
+      result=Net::HTTP.get_response(uri)
+      JSON.parse(result.body)
     end
+
+    public
 
     #= Search projects
     #
     #http://www.freelancer.com/affiliate-api.html#ProjectSearch
     #
     #== Optional
-    #:keyword
+    # :keyword
     #   Search keyword
-    #:owner
+    # :owner
     #   Username of ID of project owner
-    #:winner
+    # :winner
     #   Username of ID of project winner
-    #:jobs[]
+    # :jobs[]
     #   Names of job categories from the available list on Freelancer.com (PHP, .NET, AJAX, etc.). This parameter may be repeated more than once
-    #:featured
+    # :featured
     #   If 1 - only featured projects, if 0 - only NON-featured projects
-    #:trial
+    # :trial
     #   If 1 - only trial projects, if 0 - only NON-trial projects
-    #:for_gold_members
+    # :for_gold_members
     #   If 1 - only "For gold members" projects, if 0 - only NON "For gold members" projects
-    #:nonpublic
+    # :nonpublic
     #   If 1 - only nonpublic projects, if 0 - only public projects
-    #:min_budget
+    # :min_budget
     #   Only projects with budget higher or equal to min_budget
-    #:max_budget
+    # :max_budget
     #   Only projects with budget lower or equal to max_budget
-    #:bidding_ends
+    # :bidding_ends
     #   Only projects ending sooner than bidding_ends days
-    #:order
+    # :order
     #   How to order projects in the result output. See available project order criteria.
     #   types:
     #       :id - order by project ID
@@ -66,13 +67,13 @@ module Freelancer
     #       :budget - order by budget
     #       :relevance - order by relevance of search by keyword. This criterion should be used with the parameter keyword
     #       :rand - order randomly
-    #:order_dir
+    # :order_dir
     #   Direction of sorting. If the parameter is equal to asc, results are ordered in ascending way, otherwise - descending (desc).
-    #:pg
+    # :pg
     #   Page number. Starts from 0. Default page is 0
-    #:count
+    # :count
     #   Number of items on a page
-    #:apikey
+    # :apikey
     #   API key, paramater is optional.
     def search *args
       options=fill_args [
@@ -102,27 +103,27 @@ module Freelancer
     #http://www.freelancer.com/affiliate-api.html#ProjectProperties
     #
     #== Required
-    #:id
+    # :id
     #   the project id
     #
     #== Optional
-    #:apikey
+    # :apikey
     #   API key, paramater is optional.
     def projectDetails *args
       options=fill_args [:id,:apikey],[:id],*args
       request_widget("/Project/Properties.json",options)
     end
 
-    #Get the project details
+    #=Get the project details
     #
     #http://www.freelancer.com/affiliate-api.html#UserProperties
     #
     #== Required
-    #:id
+    # :id
     #   the user id
     #
     #== Optional
-    #:apikey
+    # :apikey
     #   API key
     def userDetails *args
       options=fill_args [:id,:apikey],[:id],*args
@@ -134,28 +135,28 @@ module Freelancer
     #http://www.freelancer.com/affiliate-api.html#FeedbackSearch
     #
     #== Required
-    #:user
+    # :user
     #   ID or username of a feedback receiver
     #
     #== Optional
-    #:project_id
+    # :project_id
     #   ID of project for which the feedback was made
-    #:type
+    # :type
     #   Type of the feedback. S - service provider's (seller's) feedbacks, B - buyer's feedbacks. By default provider's feedbacks are returned
-    #:positive
+    # :positive
     #   if positive equals to 1, only feedbacks with rating higher than average will be returned
-    #:order
+    # :order
     #   How to order feedbacks in result output.  Types:
     #       :active_date - order by date when feedback was activated (default)
     #       :rand - order randomly
     #
-    #:order_dir
+    # :order_dir
     #   Direction of sorting. If the parameter is equal to asc, results are ordered in ascending way, otherwise - descending ('desc').
-    #:pg
+    # :pg
     #   Page number. Starts from 0. Default page is 0
-    #:count
+    # :count
     #   Number of items on a page
-    #:apikey
+    # :apikey
     #   API key
     def feedbackSearch
       options=fill_args [

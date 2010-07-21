@@ -20,7 +20,7 @@ require 'net/http'
 #
 #Load all Freelancer modules
 module Freelancer
-  VERSION = "1.0.0"
+  VERSION = "1.0.2"
   #Initialize the Freelancer Wrapper Class
   #
   #Parameters

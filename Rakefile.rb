@@ -23,12 +23,25 @@ spec=Gem::Specification.new do |s|
 
   s.authors = ['Janos Haber']
   s.email = 'freelancer4r@googlegroups.com'
-  s.homepage = 'http://'
+  s.homepage = 'http://github.com/b0c1/freelancer4r'
 
   s.add_dependency(%q<json>, [">= 1.4.0"])
   s.add_dependency(%q<oauth>, [">= 0.4.1"])
-  s.add_dependency(%q<mechanize>, [">= 1.0.0"])
 end
+
+Rake::RDocTask.new do |rd|
+  rd.rdoc_dir = 'doc/rdoc'
+  rd.title = "Freelancer.com API for ruby documentation"
+  rd.main = 'README.txt'
+  rd.rdoc_files.include 'README.rdoc', 'CHANGELOG', "lib/freelancer.rb", "lib/freelancer/**/*\.rb"
+
+  rd.options << '--inline-source'
+  rd.options << '--line-numbers'
+  rd.options << '--all'
+  #  rd.options << '--fileboxes'
+  #  rd.options << '--diagram'
+end
+
 
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.need_tar = true

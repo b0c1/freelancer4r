@@ -5,9 +5,9 @@ module Freelancer
     #http://developer.freelancer.com/GetInboxMessages
     #
     #<b>Optional:</b>
-    #:projectid     => Get the private messages for the specific project
-    #:count
-    #:page
+    # :projectid     => Get the private messages for the specific project
+    # :count
+    # :page
     def getInboxMessages *args
       options=fill_args [:projectid,:count,:page],[],*args
       request "/Message/getInboxMessages.json", options
@@ -18,8 +18,8 @@ module Freelancer
     #http://developer.freelancer.com/GetSentMessages
     #
     #<b>Optional:</b>
-    #:count
-    #:page
+    # :count
+    # :page
     def getSentMessages *args
       options=fill_args [:count,:page],[],*args
       request "/Message/getSentMessages.json", options
@@ -37,10 +37,10 @@ module Freelancer
     #http://developer.freelancer.com/SendMessage
     #
     #<b>Required:</b>
-    #:projectid     => Project Id to identify the message send with
-    #:messagetext   => Message text to send
-    #:userid        => Receiver userid or username
-    #:username      => Receiver userid or username
+    # :projectid     => Project Id to identify the message send with
+    # :messagetext   => Message text to send
+    # :userid        => Receiver userid or username
+    # :username      => Receiver userid or username
     def sendMessage *args
       options=fill_args [
         :projectid,:messagetext,:userid,:username
@@ -61,7 +61,7 @@ module Freelancer
     #http://developer.freelancer.com/MarkMessageAsRead
     #
     #<b>Required:</b>
-    #:id            => Message Id to be marked as read
+    # :id            => Message Id to be marked as read
     def markMessageAsRead *args
       options=fill_args [:id],[:id],*args
       request "/Message/markMessageAsRead.json", options

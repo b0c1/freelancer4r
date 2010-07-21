@@ -5,7 +5,7 @@ module Freelancer
     #http://developer.freelancer.com/GetProjectListForPlacedBids
     #
     #<b>Required:</b>
-    #:status
+    # :status
     #         1 - All
     #         2 - Open And Frozen – Default
     #         3 - Frozen Awaiting your action
@@ -15,10 +15,10 @@ module Freelancer
     #         7 - Closed Canceled
     #
     #<b>Optional:</b>
-    #:userid     => UserID of the Poster
-    #:projectid  => Project ID filter
-    #:count      => (Default: 50)
-    #:page       => (Default: 0)
+    # :userid     => UserID of the Poster
+    # :projectid  => Project ID filter
+    # :count      => (Default: 50)
+    # :page       => (Default: 0)
     def getProjectListForPlacedBids
       options=fill_args [:status,:userid,:projectid,:count,:page],[:status],*args
       request "/Freelancer/getProjectListForPlacedBids.json", options
@@ -29,15 +29,15 @@ module Freelancer
     #http://developer.freelancer.com/PlaceBidOnProject
     #
     #<b>Required:</b>
-    #:amount        => amount
-    #:days          => days
-    #:description   => description
-    #:projectid     => project identifier
+    # :amount        => amount
+    # :days          => days
+    # :description   => description
+    # :projectid     => project identifier
     #
     #<b>Optional:</b>
-    #:notificationStatus    => Notification on anyone else bid on this project at a lower price. 0 - no notification, 1 - notification (Default: 0)
-    #:highlighted           => Highlight bids. 0 - not highlighted, 1 - highlighted. (Default: 0)
-    #:milestone             => The initial milestone percentage declares the terms of your bid. This tells the employer that you require the specified percentage as a milestone payment before you start work.
+    # :notificationStatus    => Notification on anyone else bid on this project at a lower price. 0 - no notification, 1 - notification (Default: 0)
+    # :highlighted           => Highlight bids. 0 - not highlighted, 1 - highlighted. (Default: 0)
+    # :milestone             => The initial milestone percentage declares the terms of your bid. This tells the employer that you require the specified percentage as a milestone payment before you start work.
     def placeBidOnProject *args
       options=fill_args [
         :amount,
@@ -61,7 +61,7 @@ module Freelancer
     #http://developer.freelancer.com/RetractBidFromProject
     #
     #<b>Required:</b>
-    #:projectid     => project identifier
+    # :projectid     => project identifier
     def retractBidFromProject *args
       options=fill_args [:projectid],[:projectid],*args
       request "/Freelancer/retractBidFromProject.json", options
@@ -72,8 +72,8 @@ module Freelancer
     #http://developer.freelancer.com/AcceptBidWon
     #
     #<b>Required:</b>
-    #:projectid     => project identifier
-    #:state         => 0 - decline , 1 - Accept (default)
+    # :projectid     => project identifier
+    # :state         => 0 - decline , 1 - Accept (default)
     def acceptBidWon *args
       options=fill_args [:projectid,:state],[:projectid],*args
       request "/Freelancer/acceptBidWon.json", options

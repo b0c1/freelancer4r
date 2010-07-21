@@ -5,17 +5,17 @@ module Freelancer
     #http://developer.freelancer.com/PostNewProject
     #
     #<b>Required:</b>
-    #:projectType    => The type of tye project (:normal,:trial,:draft)
-    #:projectname    => Project name to post
-    #:projectdesc    => Project description
-    #:jobtypecsv     => Job category associated with project
-    #:budget         => Budget of the project
-    #:duration       => Period of the project
+    # :projectType    => The type of tye project (:normal,:trial,:draft)
+    # :projectname    => Project name to post
+    # :projectdesc    => Project description
+    # :jobtypecsv     => Job category associated with project
+    # :budget         => Budget of the project
+    # :duration       => Period of the project
     #
     #<b>Optional:</b> (available on :normal and :draft)
-    #:isfeatured     => Set to 1 if post as a featured project.(Default: 0)
-    #:isnonpublic    => Set to 1 if post as a nonpublic project.(Default: 0)
-    #:isbidhidden    => Set to 1 if post as a sealbids project.(Default: 0)
+    # :isfeatured     => Set to 1 if post as a featured project.(Default: 0)
+    # :isnonpublic    => Set to 1 if post as a nonpublic project.(Default: 0)
+    # :isbidhidden    => Set to 1 if post as a sealbids project.(Default: 0)
     def postNewProject *args
       options=fill_args [
         :projectType,
@@ -54,8 +54,8 @@ module Freelancer
     #http://developer.freelancer.com/ChooseWinnerForProject
     #
     #<b>Required:</b>
-    #:projectid    => Project identifier
-    #:useridcsv    => Allows multiple winner for ALL except full-time jobs. At-least one ID mandatory
+    # :projectid    => Project identifier
+    # :useridcsv    => Allows multiple winner for ALL except full-time jobs. At-least one ID mandatory
     def chooseWinnerForProject *args
       options=fill_args [:projectid,:useridcsv],[:projectid,:useridcsv],*args
       request "/Employer/chooseWinnerForProject.json", options
@@ -66,7 +66,7 @@ module Freelancer
     #http://developer.freelancer.com/GetPostedProjectList
     #
     #<b>Required:</b>
-    #:status
+    # :status
     #         1 - All
     #         2 - Open And Frozen – Default
     #         3 - Frozen Awaiting your action
@@ -76,10 +76,10 @@ module Freelancer
     #         7 - Closed Canceled
     #
     #<b>Optional:</b>
-    #:userid     => UserID of the Poster
-    #:projectid  => Project ID filter
-    #:count      => (Default: 50)
-    #:page       => (Default: 0)
+    # :userid     => UserID of the Poster
+    # :projectid  => Project ID filter
+    # :count      => (Default: 50)
+    # :page       => (Default: 0)
     def getPostedProjectList *args
       options=fill_args [:status,:userid,:projectid,:count,:page],[:status],*args
       request "/Employer/getPostedProjectList.json", options
@@ -90,9 +90,9 @@ module Freelancer
     #http://developer.freelancer.com/InviteUserForProject
     #
     #<b>Required:</b>
-    #:useridcsv         => :useridcsv <b>OR</b> :usernamecsv
-    #:usernamecsv       => Can be CSV also to allow multiple user invite
-    #:projectid         => Project identifier
+    # :useridcsv         => :useridcsv <b>OR</b> :usernamecsv
+    # :usernamecsv       => Can be CSV also to allow multiple user invite
+    # :projectid         => Project identifier
     def inviteUserForProject *args
       options=fill_args [:useridcsv,:usernamecsv,:projectid],[:projectid],*args
       if options[:useridcsv]==nil && options[:usernamecsv]==nil
@@ -110,11 +110,11 @@ module Freelancer
   #http://developer.freelancer.com/UpdateProjectDetails
   #
   #<b>Required:</b>
-  #:projectid
+  # :projectid
   #
   #<b>Optional:</b>
-  #:projectdesc
-  #:jobtypecsv
+  # :projectdesc
+  # :jobtypecsv
   def updateProjectDetails *args
     options=fill_args [:projectid,:projectdesc,:jobtypecsv],[:projectid],*args
     request "/Employer/updateProjectDetails.json", options

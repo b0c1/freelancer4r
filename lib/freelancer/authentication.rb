@@ -44,8 +44,11 @@ module Freelancer
         login_stage1
       end
       if @username != nil && @password != nil && @callback == OAuth::OUT_OF_BAND
-        try_to_authorize
-        login_stage3
+        if try_to_authorize
+          login_stage3
+        else
+          @request_token.authorize_url
+        end
       else
         @request_token.authorize_url
       end
@@ -68,7 +71,7 @@ module Freelancer
     def login
       login_stage1              #login stage 1, request unauthorized token
       login_stage2              #login stage 2, try to log in ang get the verifier
-      if @authorized            
+      if @authorized
         login_stage3            #if we have verifier, we get the access token key
       else                      #if we not have verifier, authentication or not oob callback selected, request manual login, return the url
         return @request_token.authorize_url
@@ -79,26 +82,31 @@ module Freelancer
 
     #Try to emulate user authorization
     def try_to_authorize
-      require 'mechanize'
-      @agent ||= Mechanize.new
-      @agent.user_agent_alias='Mac Safari'
+      begin
+        require 'mechanize'
 
-      @agent.set_proxy(proxy.host, proxy.port, proxy.user,proxy.password) if proxy != nil
-      page = @agent.get(web_url)
-      login_form=page.form_with(:name=>'login_form')
-      if login_form != nil
-        login_form.field_with(:name=>'username').value=@username
-        login_form.field_with(:name=>'passwd').value=@password
-        @agent.submit(login_form)
-      end
-      initial_page=@agent.get(@request_token.authorize_url)
-      initial_page.forms.each do |form|
-        if form.has_field? 'oauth_token'
-          result=form.submit
-          return
+        @agent ||= Mechanize.new
+        @agent.user_agent_alias='Mac Safari'
+
+        @agent.set_proxy(proxy.host, proxy.port, proxy.user,proxy.password) if proxy != nil
+        page = @agent.get(web_url)
+        login_form=page.form_with(:name=>'login_form')
+        if login_form != nil
+          login_form.field_with(:name=>'username').value=@username
+          login_form.field_with(:name=>'passwd').value=@password
+          @agent.submit(login_form)
         end
+        initial_page=@agent.get(@request_token.authorize_url)
+        initial_page.forms.each do |form|
+          if form.has_field? 'oauth_token'
+            result=form.submit
+            return true
+          end
+        end
+      rescue LoadError
+        false
       end
-      nil
+      false
     end
   end
 end

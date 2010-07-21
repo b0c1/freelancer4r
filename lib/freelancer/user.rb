@@ -5,12 +5,12 @@ module Freelancer
     #http://developer.freelancer.com/GetUsersBySearch
     #
     #<b>Optional:</b>
-    #:username        => Username of the person for who you are searching.
-    #:expertise_csv   => Comma separated list of job categories, refer to the main page for a list of categories.
-    #:country_csv     => Comma separated list of countries
-    #:rating          => Minimum rating for the user
-    #:count           => (default: 50)
-    #:page            => (default: 0)
+    # :username        => Username of the person for who you are searching.
+    # :expertise_csv   => Comma separated list of job categories, refer to the main page for a list of categories.
+    # :country_csv     => Comma separated list of countries
+    # :rating          => Minimum rating for the user
+    # :count           => (default: 50)
+    # :page            => (default: 0)
     def getUsersBySearch *args
       options=fill_args [
         :username,
@@ -28,11 +28,11 @@ module Freelancer
     #http://developer.freelancer.com/GetUserFeedback
     #
     #<b>Required:</b>
-    #:username         => Username or userid is required
-    #:userid           => Username or userid is required
+    # :username         => Username or userid is required
+    # :userid           => Username or userid is required
     #
     #<b>Optional:</b>
-    #:type             => [P = Provider Only, B = Buyer Only, A = Default, All]
+    # :type             => [P = Provider Only, B = Buyer Only, A = Default, All]
     def getUsersFeedback *args
       options=fill_args [:username,:userid,:type],[],*args
       if options[:username]==nil && options[:userid]==nil
@@ -49,8 +49,8 @@ module Freelancer
     #http://developer.freelancer.com/GetUserDetails
     #
     #<b>Required:</b>
-    #:username         => Username or userid is required
-    #:userid           => Username or userid is required
+    # :username         => Username or userid is required
+    # :userid           => Username or userid is required
     def getUserDetails *args
       options=fill_args [:username,:userid],[],*args
       if options[:username]==nil && options[:userid]==nil
