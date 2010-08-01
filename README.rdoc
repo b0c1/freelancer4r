@@ -2,7 +2,11 @@
 Freelancer API for ruby
 
    This api allow to call freelancer api from ruby code.
-   It's can login to freelancer with "mechanize", using oauth library 
+   It's can login to freelancer with "mechanize", using oauth library
+   
+   Main site:     http://github.com/b0c1/freelancer4r
+   RDoc:          http://freelancer4r.javaportal.hu/
+   Mailing list:  http://groups.google.com/group/freelancer4r 
 
 == Installation
 

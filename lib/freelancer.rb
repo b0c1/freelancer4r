@@ -20,16 +20,15 @@ require 'net/http'
 #
 #Load all Freelancer modules
 module Freelancer
-  VERSION = "1.0.2"
+  VERSION = "1.0.8"
   #Initialize the Freelancer Wrapper Class
   #
   #Parameters
-  #
-  #<b>sandbox</b>   true if we are using freelancer sandbox, default: false
-  #<b>username</b>  the username for the automatic authorization, default: nil
-  #<b>password</b>  the password for the automatic authorization, default: nil
-  #<b>application token</b>   the application token from freelancer
-  #<b>application secret</b>   the application secret from freelancer
+  # <b>sandbox</b>              => true if we are using freelancer sandbox, default: false
+  # <b>username</b>             => the username for the automatic authorization, default: nil
+  # <b>password</b>             => the password for the automatic authorization, default: nil
+  # <b>application token</b>    => the application token from freelancer
+  # <b>application secret</b>   => the application secret from freelancer
   def self.new sandbox=false,application_token=nil,application_secret=nil,username=nil,password=nil
     freelancer=Freelancer.new
     freelancer.sandbox=sandbox
@@ -61,6 +60,10 @@ module Freelancer
     include User
   end
 
+  #Initialize Freelancer Widget API
+  #
+  #Parameters
+  # <b>sandbox</b>              => true if we are using freelancer sandbox, default: false
   def self.new_widget sandbox=false
     widget=FreelancerWidget.new
     widget.sandbox=sandbox

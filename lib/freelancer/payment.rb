@@ -149,5 +149,40 @@ module Freelancer
       options=fill_args [:transactionid,:fullname],[:transactionid,:fullname],*args
       request "/Payment/releaseMilestone.json", options
     end
+
+    #Retrieve the balance for current user.
+    #
+    #http://developer.freelancer.com/GetBalance
+    def getBalance
+      request "/Payment/getBalance.json"
+    end
+
+    #Validate the transfer action before actually transfer.
+    #
+    #http://developer.freelancer.com/PrepareTransfer
+    #
+    #<b>Required:</b>
+    # :projectid      => Mandatory if Partial or Full payment for a project.
+    # :amount         => Min $30 Validation
+    # :touserid       => Userid transfer money to.
+    # :reasontype     => partial|full|other
+    def prepareTransfer *args
+      options=fill_args [:projectid,:amount,:touserid,:reasontype],[:projectid,:amount,:touserid,:reasontype],*args
+      request "/Payment/prepareTransfer.json", options
+    end
+    
+    #Retrieve the withdrawal fee
+    #
+    #http://developer.freelancer.com/GetWithdrawalFees
+    def getWithdrawalFees
+      request "/Payment/getWithdrawalFees.json"
+    end
+    
+    #Retrieve the project list and selected freelancer for transferring.
+    #
+    #http://developer.freelancer.com/GetProjectListForTransfer
+    def getProjectListForTransfer
+      request "/Payment/getProjectListForTransfer.json"
+    end
   end
 end

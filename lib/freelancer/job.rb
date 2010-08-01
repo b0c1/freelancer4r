@@ -6,5 +6,19 @@ module Freelancer
     def getJobList
       request "/Job/getJobList.json"
     end
+
+    #Retrieve job list with super category.
+    #
+    #http://developer.freelancer.com/GetCategoryJobList
+    def getCategoryJobList
+      request "/Job/getCategoryJobList.json"
+    end
+
+    #Retrieve job(skill) list for current user.
+    #
+    #http://developer.freelancer.com/GetMyJobList
+    def getMyJobList
+      request "/Job/getMyJobList.json"
+    end
   end
 end

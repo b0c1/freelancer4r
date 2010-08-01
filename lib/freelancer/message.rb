@@ -66,5 +66,21 @@ module Freelancer
       options=fill_args [:id],[:id],*args
       request "/Message/markMessageAsRead.json", options
     end
+
+    #Retrieve private messages sent between two users for same project.
+    #
+    #http://developer.freelancer.com/LoadMessageThread
+    #
+    #<b>Required:</b>
+    # :projectid      => Get the private messages for the specific project
+    # :betweenuserid  => The user Id for conversation between
+    #
+    #<b>Optional:</b>
+    # :count          => items per page
+    # :page           => page
+    def loadMessageThread *args
+      options=fill_args [:projectid,:betweenuserid,:count,:page],[:projectid,:betweenuserid],*args
+      request "/Message/loadMessageThread.json", options
+    end
   end
 end

@@ -9,7 +9,15 @@ module Freelancer
     # :projectname    => Project name to post
     # :projectdesc    => Project description
     # :jobtypecsv     => Job category associated with project
-    # :budget         => Budget of the project
+    # :budgetoption   =>
+    #                 0 - Customised Budget, only for FEATURED or FULLTIME project
+    #                 1 - $250-750
+    #                 2 - $750-1500
+    #                 3 - $1500-3000
+    #                 4 - $3000-5000
+    #                 5 - $30-$250
+    #                 6 - >$5000
+    # :budget         => Budget of the project, Required if using customised budget.
     # :duration       => Period of the project
     #
     #<b>Optional:</b> (available on :normal and :draft)
@@ -22,6 +30,7 @@ module Freelancer
         :projectname,
         :projectdesc,
         :jobtypecsv,
+        :budgetoption,
         :budget,
         :duration,
         :isfeatured,
@@ -32,10 +41,13 @@ module Freelancer
         :projectname,
         :projectdesc,
         :jobtypecsv,
-        :budget,
+        :budgetoption,
         :duration
       ],*args
       type=options.delete(:projectType)
+      if options[:budgetoption]==0 && options[:budget]==nil
+        raise "Custom budget option, budget parameter required"
+      end
       case type
       when :normal
         request "/Employer/postNewProject.json",options
@@ -103,20 +115,65 @@ module Freelancer
       end
       request "/Employer/inviteUserForProject.json", options
     end
-  end
 
-  #Update the details for a posted project.
-  #
-  #http://developer.freelancer.com/UpdateProjectDetails
-  #
-  #<b>Required:</b>
-  # :projectid
-  #
-  #<b>Optional:</b>
-  # :projectdesc
-  # :jobtypecsv
-  def updateProjectDetails *args
-    options=fill_args [:projectid,:projectdesc,:jobtypecsv],[:projectid],*args
-    request "/Employer/updateProjectDetails.json", options
+    #Update the details for a posted project.
+    #
+    #http://developer.freelancer.com/UpdateProjectDetails
+    #
+    #<b>Required:</b>
+    # :projectid
+    #
+    #<b>Optional:</b>
+    # :projectdesc
+    # :jobtypecsv
+    def updateProjectDetails *args
+      options=fill_args [:projectid,:projectdesc,:jobtypecsv],[:projectid],*args
+      request "/Employer/updateProjectDetails.json", options
+    end
+
+    #Retrieve the eligibility for current user to post a trial project.
+    #
+    #http://developer.freelancer.com/EligibleForTrialProject
+    def eligibleForTrialProject
+      request "/Employer/eligibleForTrialProject.json"
+    end
+
+    #Publish Draft project to Trial or Normal.
+    #
+    #http://developer.freelancer.com/PublishDraftProject
+    #
+    #<b>Required:</b>
+    # :projectid        => Draft project ID
+    #
+    #<b>Optional:</b>
+    # :publishoption
+    #           :trial  => Publish to Trial Project (if not eligible, saved as Draft project)
+    #           :normal => Publish to Normal Project (Default)
+    def publishDraftProject *args
+      options=fill_args [:projectid,:publishoption],[:projectid],*args
+      request "/Employer/publishDraftProject.json", options
+    end
+
+    #Upgrade Trial project to Normal.
+    #
+    #http://developer.freelancer.com/UpgradeTrialProject
+    #
+    #<b>Required:</b>
+    # :projectid        => Trial project ID
+    def upgradeTrialProject *args
+      options=fill_args [:projectid],[:projectid],*args
+      request "/Employer/upgradeTrialProject.json", options
+    end
+
+    #Delete draft project
+    #
+    #http://developer.freelancer.com/DeleteDraftProject
+    #
+    #<b>Required:</b>
+    # :projectid        => Draft project ID
+    def deleteDraftProject *args
+      options=fill_args [:projectid],[:projectid],*args
+      request "/Employer/deleteDraftProject.json", options
+    end
   end
 end

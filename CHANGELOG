@@ -1,3 +1,22 @@
+== Freelancer4r 1.0.8 (2010.08.01)
+* Class bugfix
+
+== Freelancer4r 1.0.7 (2010.08.01)
+* Api changes (employer api changes, see Freelancer::Employer class)
+
+== Freelancer4r 1.0.6 (2010.07.23)
+* Api changes (new Project budget option added, see Freelancer::Employer class)
+
+== Freelancer4r 1.0.5 (2010.07.21)
+* Widget documentation changes
+
+== Freelancer4r 1.0.4 (2010.07.21)
+* Rake rdoc generation tweak
+* README modify, mailing list added
+
+== Freelancer4r 1.0.3 (2010.07.21)
+* Updated freelancer api new functions
+
 == Freelancer4r 1.0.2 (2010.07.21)
 * Widget API completed
 * RDoc correction

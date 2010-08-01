@@ -30,7 +30,7 @@ spec=Gem::Specification.new do |s|
 end
 
 Rake::RDocTask.new do |rd|
-  rd.rdoc_dir = 'doc/rdoc'
+  rd.rdoc_dir = ENV['RDOC_DIR'] if ENV['RDOC_DIR']
   rd.title = "Freelancer.com API for ruby documentation"
   rd.main = 'README.txt'
   rd.rdoc_files.include 'README.rdoc', 'CHANGELOG', "lib/freelancer.rb", "lib/freelancer/**/*\.rb"

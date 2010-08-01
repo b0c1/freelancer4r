@@ -116,5 +116,22 @@ module Freelancer
       request "/Common/getPendingFeedback.json", options
     end
 
+    #Return the current config version
+    #
+    #http://developer.freelancer.com/GetConfigVersion
+    #
+    #<b>Required:</b>
+    # :function       => withdrawalfee | projectfee | joblist | terms
+    def getConfigVersion *args
+      options=fill_args [:function],[:function],*args
+      request "/Common/getConfigVersion.json", options
+    end
+
+    #Retrieve Terms and Conditions
+    #
+    #http://developer.freelancer.com/GetTerms
+    def getTerms
+      request "/Common/getTerms.json"
+    end
   end
 end
